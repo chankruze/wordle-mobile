@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "wordle-ftw",
-    "slug": "wordle-ftw",
+    "name": "wordle-mobile",
+    "slug": "wordle-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

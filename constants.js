@@ -22,6 +22,7 @@ export const colorsToEmoji = {
 
 export const ENTER = "ENTER";
 export const CLEAR = "CLEAR";
+export const NUMBER_OF_TRIES = 6;
 
 export const keys = [
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
