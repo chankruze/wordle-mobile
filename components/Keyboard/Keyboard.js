@@ -3,7 +3,7 @@ import { keys, ENTER, CLEAR, colors } from "../../constants";
 import styles, { keyWidth } from "./Keyboard.styles";
 
 const Keyboard = ({
-  onKeyPressed = () => {},
+  onKeyPress = () => {},
   greenCaps = [],
   yellowCaps = [],
   greyCaps = [],
@@ -31,7 +31,7 @@ const Keyboard = ({
         <View style={styles.row} key={`row-${i}`}>
           {keyRow.map((key) => (
             <TouchableOpacity
-              onPress={() => onKeyPressed(key)}
+              onPress={() => onKeyPress(key)}
               disabled={greyCaps.includes(key)}
               key={key}
               style={[
