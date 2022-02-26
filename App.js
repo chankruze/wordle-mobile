@@ -1,17 +1,30 @@
+/*
+Author: chankruze (chankruze@gmail.com)
+Created: Sat Feb 26 2022 19:34:20 GMT+0530 (India Standard Time)
+
+Copyright (c) geekofia 2022 and beyond
+*/
+
 import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, Text, SafeAreaView, ScrollView, Alert } from "react-native";
-import * as Clipboard from 'expo-clipboard';
+import * as Clipboard from "expo-clipboard";
+// custom components
 import Keyboard from "./components/Keyboard/Keyboard";
+// styles
 import { styles } from "./App.styles";
+// data
 import { words } from "./data/words";
+// utils
 import { copyArray, getDayOfTheYear } from "./utils";
+// constants
 import {
   NUMBER_OF_TRIES,
   colors,
   CLEAR,
   ENTER,
   colorsToEmoji,
+  GAME_STATE,
 } from "./constants";
 
 const dayOfTheYear = getDayOfTheYear();
@@ -25,55 +38,68 @@ export default function App() {
   );
   const [currentRow, setCurrentRow] = useState(0);
   const [currentCol, setCurrentCol] = useState(0);
-  const [gameState, setGameState] = useState("playing"); // won, lost, playing
+  const [gameState, setGameState] = useState(GAME_STATE.PLAYING);
 
+  // check if the game state and show the appropriate message
   const checkGameState = () => {
-    if (checkIfWon() && gameState !== "won") {
+    // check if the game is won
+    if (checkIfWon() && gameState !== GAME_STATE.WON) {
       Alert.alert("Huraaay", "You won!", [
         { text: "Share", onPress: shareScore },
       ]);
       setGameState("won");
-    } else if (checkIfLost() && gameState !== "lost") {
+    }
+    // check if the game is lost
+    if (checkIfLost() && gameState !== GAME_STATE.LOST) {
       Alert.alert("Meh", "Try again tomorrow!");
       setGameState("lost");
     }
   };
 
+  // check if the game state whenever the current row changes
   useEffect(() => {
     if (currentRow > 0) {
       checkGameState();
     }
   }, [currentRow]);
 
+  //  share the score
   const shareScore = () => {
+    // create a string of emojis
     const textMap = rows
       .map((row, i) =>
         row.map((cell, j) => colorsToEmoji[getCellBGColor(i, j)]).join("")
       )
       .filter((row) => row)
       .join("\n");
-    const textToShare = `Wordle \n${textMap}`;
+    // construc the text to share
+    const textToShare = `Wordle ${dayOfTheYear}\n${textMap}`;
+    // set the text to share to clipboard
     Clipboard.setString(textToShare);
+    // alert the user
     Alert.alert("Copied successfully", "Share your score on you social media");
   };
 
+  //  check if the game is won
   const checkIfWon = () => {
-    const row = rows[currentRow - 1];
-
-    return row.every((letter, i) => letter === letters[i]);
+    return rows[currentRow - 1].every((letter, i) => letter === letters[i]);
   };
 
+  // check if game is lost
   const checkIfLost = () => {
     return !checkIfWon() && currentRow === rows.length;
   };
 
+  // set the background color of the cell
   const onKeyPress = (key) => {
-    if (gameState !== "playing") {
+    // if game is won or lost, do nothing
+    if (gameState !== GAME_STATE.PLAYING) {
       return;
     }
 
     const updatedRows = copyArray(rows);
 
+    // if the key is clear
     if (key === CLEAR) {
       const prevCol = currentCol - 1;
       if (prevCol >= 0) {
@@ -84,12 +110,12 @@ export default function App() {
       return;
     }
 
+    // if the key is enter
     if (key === ENTER) {
       if (currentCol === rows[0].length) {
         setCurrentRow(currentRow + 1);
         setCurrentCol(0);
       }
-
       return;
     }
 
@@ -100,25 +126,35 @@ export default function App() {
     }
   };
 
+  // get the background color of the cell
   const getCellBGColor = (row, col) => {
     const letter = rows[row][col];
 
+    // if the row is empty, return the default color
     if (row >= currentRow) {
       return colors.black;
     }
+
+    // if the letter is present in the correct position
     if (letter === letters[col]) {
       return colors.primary;
     }
+
+    // if the letter is present in the wrong position
     if (letters.includes(letter)) {
       return colors.secondary;
     }
+
+    // letter is not present in the word
     return colors.darkgrey;
   };
 
+  // check if the cell is active
   const isCellActive = (row, col) => {
     return row === currentRow && col === currentCol;
   };
 
+  // get all letters that have provided color as background
   const getAllLettersWithColor = (color) => {
     return rows.flatMap((row, i) =>
       row.filter((cell, j) => getCellBGColor(i, j) === color)

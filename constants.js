@@ -1,5 +1,5 @@
 /*
-Author: chankruze (chankruze@geekofia.in)
+Author: chankruze (chankruze@gmail.com)
 Created: Fri Feb 25 2022 17:31:50 GMT+0530 (India Standard Time)
 
 Copyright (c) geekofia 2022 and beyond
@@ -29,3 +29,9 @@ export const keys = [
   ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
   [ENTER, "z", "x", "c", "v", "b", "n", "m", CLEAR],
 ];
+
+export const GAME_STATE = {
+  PLAYING: "playing",
+  WON: "won",
+  LOST: "lost",
+};

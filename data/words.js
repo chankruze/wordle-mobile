@@ -1,5 +1,5 @@
 /*
-Author: chankruze (chankruze@geekofia.in)
+Author: chankruze (chankruze@gmail.com)
 Created: Fri Feb 25 2022 18:24:17 GMT+0530 (India Standard Time)
 
 Copyright (c) geekofia 2022 and beyond
