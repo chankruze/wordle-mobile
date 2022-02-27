@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
-      <Toolbar />
+      {/* <Toolbar /> */}
       {children}
     </SafeAreaView>
   );
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.black,
-    paddingTop: Platform.OS === "android" ? 25 : 0,
+    // paddingTop: Platform.OS === "android" ? 25 : 0,
   },
 });
 

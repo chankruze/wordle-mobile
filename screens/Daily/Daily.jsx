@@ -11,7 +11,7 @@ import * as Clipboard from "expo-clipboard";
 // custom components
 import Keyboard from "../../components/Keyboard/Keyboard";
 // styles
-import { styles } from "./Home.styles";
+import { styles } from "./Daily.styles";
 // data
 import { words } from "../../data/words";
 // utils
@@ -29,7 +29,7 @@ import Layout from "../../components/Layout";
 
 const dayOfTheYear = getDayOfTheYear();
 
-export default function Home() {
+export default function Daily() {
   const word = words[dayOfTheYear];
   const letters = word.split("");
 

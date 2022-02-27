@@ -5,53 +5,68 @@ Created: Sat Feb 26 2022 19:34:20 GMT+0530 (India Standard Time)
 Copyright (c) geekofia 2022 and beyond
 */
 
-import Home from "./screens/Home/Home";
-
-// material bottom tab
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-
 // react-native navigation
 import { NavigationContainer } from "@react-navigation/native";
-import { colors } from "./constants";
+// drawer navigator
+import { createDrawerNavigator } from "@react-navigation/drawer";
+// screens
+import Daily from "./screens/Daily/Daily";
 import Zen from "./screens/Zen/Zen";
-import { MaterialIcons } from "@expo/vector-icons";
+// colors
+import { colors } from "./constants";
+// icons
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Text, View } from "react-native";
 
-const Tab = createMaterialBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        barStyle={{
-          // borderTopWidth: 1,
-          // borderTopColor: colors.darkgrey,
-          backgroundColor: colors.black,
+      <Drawer.Navigator
+        initialRouteName="Daily"
+        defaultStatus="open"
+        headerMode="none"
+        screenOptions={{
+          // headerShown: false,
+          headerStyle: {
+            backgroundColor: colors.black,
+          },
+          headerShadowVisible: false,
+          headerTintColor: colors.white,
+          drawerActiveTintColor: colors.primary,
+          drawerInactiveTintColor: colors.lightgrey,
+          drawerStyle: {
+            backgroundColor: colors.black,
+            width: 240,
+          },
         }}
-        shifting={true}
-        // labeled={true}
       >
-        <Tab.Screen
-          name="Home"
-          component={Home}
+        <Drawer.Screen
+          name="Daily"
+          component={Daily}
           options={{
-            tabBarLabel: "Daily",
-            tabBarIcon: ({ color }) => (
-              <MaterialIcons name="calendar-today" color={color} size={26} />
+            title: "Daily Wordle",
+            drawerIcon: ({ color, size }) => (
+              <Ionicons name="md-calendar-outline" color={color} size={size} />
             ),
           }}
         />
-        <Tab.Screen
+        <Drawer.Screen
           name="Zen"
           component={Zen}
           options={{
-            tabBarLabel: "Zen",
-            tabBarIcon: ({ color }) => (
-              <MaterialIcons name="gamepad" color={color} size={26} />
+            title: "Zen Mode",
+            drawerIcon: ({ color, size }) => (
+              <Ionicons
+                name="md-game-controller-outline"
+                color={color}
+                size={size}
+              />
             ),
           }}
         />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   );
 }

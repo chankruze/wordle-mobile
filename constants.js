@@ -7,6 +7,7 @@ Copyright (c) geekofia 2022 and beyond
 
 export const colors = {
   black: "#121214",
+  white: "#ffffff",
   darkgrey: "#3A3A3D",
   grey: "#818384",
   lightgrey: "#D7DADC",

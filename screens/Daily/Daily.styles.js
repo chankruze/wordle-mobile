@@ -11,7 +11,7 @@ import { colors } from "../../constants";
 export const styles = StyleSheet.create({
   map: {
     alignSelf: "stretch",
-    // marginVertical: 20,
+    // marginVertical: 10,
   },
   row: {
     alignSelf: "stretch",
