@@ -1,22 +1,21 @@
 /*
 Author: chankruze (chankruze@gmail.com)
-Created: Sat Feb 26 2022 19:34:20 GMT+0530 (India Standard Time)
+Created: Sat Feb 26 2022 19:41:45 GMT+0530 (India Standard Time)
 
 Copyright (c) geekofia 2022 and beyond
 */
 
 import { useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import { View, Text, SafeAreaView, ScrollView, Alert } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import * as Clipboard from "expo-clipboard";
 // custom components
-import Keyboard from "./components/Keyboard/Keyboard";
+import Keyboard from "../../components/Keyboard/Keyboard";
 // styles
-import { styles } from "./App.styles";
+import { styles } from "./Home.styles";
 // data
-import { words } from "./data/words";
+import { words } from "../../data/words";
 // utils
-import { copyArray, getDayOfTheYear } from "./utils";
+import { copyArray, getDayOfTheYear } from "../../utils";
 // constants
 import {
   NUMBER_OF_TRIES,
@@ -25,11 +24,12 @@ import {
   ENTER,
   colorsToEmoji,
   GAME_STATE,
-} from "./constants";
+} from "../../constants";
+import Layout from "../../components/Layout";
 
 const dayOfTheYear = getDayOfTheYear();
 
-export default function App() {
+export default function Home() {
   const word = words[dayOfTheYear];
   const letters = word.split("");
 
@@ -166,10 +166,7 @@ export default function App() {
   const greyCaps = getAllLettersWithColor(colors.darkgrey);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
-      {/* title */}
-      <Text style={styles.title}>wordle</Text>
+    <Layout>
       {/* map */}
       <ScrollView style={styles.map}>
         {rows.map((_row, _rowIdx) => (
@@ -200,6 +197,6 @@ export default function App() {
         yellowCaps={yellowCaps}
         greyCaps={greyCaps}
       />
-    </SafeAreaView>
+    </Layout>
   );
 }

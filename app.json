@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Wordle",
+    "name": "Wordle Mobile",
     "slug": "wordle-mobile",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#000000"
       },
-      "package": "com.chankruze.wordlemobile"
+      "package": "com.chankruze.wordlemobile",
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -6,25 +6,12 @@ Copyright (c) geekofia 2022 and beyond
 */
 
 import { StyleSheet, Platform } from "react-native";
-import { colors } from "./constants";
+import { colors } from "../../constants";
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.black,
-    alignItems: "center",
-    paddingTop: Platform.OS === "android" ? 25 : 0,
-  },
-  title: {
-    color: colors.lightgrey,
-    textTransform: "uppercase",
-    fontSize: 32,
-    fontWeight: "bold",
-    letterSpacing: 7,
-  },
   map: {
     alignSelf: "stretch",
-    marginVertical: 20,
+    // marginVertical: 20,
   },
   row: {
     alignSelf: "stretch",
